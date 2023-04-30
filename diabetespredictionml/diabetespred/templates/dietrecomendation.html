@@ -1,0 +1,139 @@
+
+{% extends 'temp.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Diet Recommendation</title>
+    <style>
+        /* CSS styles */
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f1f1f1;
+        }
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fff;
+          border-radius: 5px;
+        }
+        h1 {
+          text-align: center;
+        }
+        h4 {
+          margin-top: 20px;
+          margin-bottom: 10px;
+        }
+        label {
+          display: block;
+          margin-bottom: 10px;
+          font-weight: bold;
+        }
+        input[type="range"] {
+          width: 100%;
+          margin-bottom: 20px;
+          -webkit-appearance: none;
+          background-color: #f1f1f1;
+          height: 10px;
+          border-radius: 5px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 20px;
+          height: 20px;
+          background-color: #007bff;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        .slider-labels {
+          display: flex;
+          justify-content: space-between;
+        }
+        .grey-text {
+          color: #b3b3b3;
+          font-style: italic;
+          font-size: 14px;
+          margin-top: 5px;
+          text-align: right;
+        }
+        select {
+          width: 100%;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+        button[type="submit"] {
+          display: block;
+          width: 100%;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          padding: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+          background-color: #0062cc;
+        }
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Diet Recommendation</h1>
+      <h4>Modify the values and click the Generate button to use</h4>
+      <form method="POST" action="{% url 'dietrecomendation' %}">
+        {% csrf_token %}
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label>
+        <label for="activity">Activity:</label>
+        <input type="range" id="activity" name="activity" min="0" max="4" step="1">
+        <div class="slider-labels">
+            <span class ="grey-text">Little/no exercise</span>
+            <span class="grey-text">Extra active (very active & physical job)</span>
+        </div>
+        <label for="weight-loss-plan">Choose your weight loss plan:</label>
+        <select id="weight-loss-plan" name="weight-loss-plan">
+          <option value="maintain-weight">Maintain weight</option>
+          <option value="mild-weight-loss">Mild weight loss</option>
+          <option value="weight-loss">Weight loss</option>
+          <option value="extreme-weight-loss">Extreme weight loss</option>
+        </select>
+        <label for="meal-type">Choose your meal type:</label>
+          <select id="meal-type" name="meal_type">
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+          </select>
+        <button type="submit">Generate</button>
+      </form>
+      {% if dietsuggestion %}
+      <h4 style="margin-top: 20px;">Diet Suggestions:</h4>
+      <table style="border-collapse: collapse; width: 100%;">
+        <thead>
+          <tr>
+            <th style="border: 1px solid #ddd; padding: 8px;">Suggested Food Item</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for suggestion in dietsuggestion %}
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">{{ suggestion }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}   
+    {% if BMI %} 
+    <h4 style="margin-top: 20px;">Your BMI:</h4>
+    <p style="font-size: 18px; font-weight: bold;">{{BMI}}</p>
+    {% endif %} 
+    </div>
+  </body>
+</html>
+{% endblock %}

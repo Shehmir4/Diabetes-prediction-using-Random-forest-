@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="confirm-modify">
+    <br> 
+  <p>Details already exist. Do you want to modify details?</p>
+  <br> 
+  <a href="{% url 'modify_details' %}" class="btn">Yes</a>
+  <a href="{% url 'dataexist' %}" class="btn">No</a>
+</div>
+ <!-- adding a line break here -->
+
+{% endblock %}

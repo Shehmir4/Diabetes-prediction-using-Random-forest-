@@ -1,0 +1,83 @@
+{% include 'navbar.html'%}
+{% csrf_token %}
+<html>
+<head>
+  <title>}Diabetes Prediction</title>
+  <link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+  crossorigin="anonymous"
+/>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+  integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+  crossorigin="anonymous"
+></script>
+<script>
+  function clearForm() {
+    document.getElementById("form1").reset();
+  }
+  </script>
+</head>
+<body>
+  <div class="contact-us container my-5">
+    <div class="card p-4">
+      <div class="card-header bg-primary text-white">
+        <h1 class="text-center m-0">Diabetes Prediction</h1>
+      </div>
+      <form id="form1" name="form1" method="post" action="{% url 'diabetes_prediction' %}">
+        {% csrf_token %}
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="Pregnancies">Pregnancies</label>
+              <input type="text" class="form-control" name="Pregnancies" id="Pregnancies" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="Glucose">Glucose</label>
+              <input type="text" class="form-control" name="Glucose" id="Glucose" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="BloodPressure">Blood Pressure</label>
+              <input type="text" class="form-control" name="BloodPressure" id="BloodPressure" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="SkinThickness">Skin Thickness</label>
+              <input type="text" class="form-control" name="SkinThickness" id="SkinThickness" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="Insulin">Insulin</label>
+              <input type="text" class="form-control" name="Insulin" id="Insulin" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="Height">Height (in Cms)</label>
+              <input type="text" class="form-control" name="Height" id="Height" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="Weight">Weight (in Kg's)</label>
+              <input type="text" class="form-control" name="Weight" id="Weight" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="Age">Age</label>
+              <input type="text" class="form-control" name="Age" id="Age" required>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary" onclick="clearForm()">Clear</button>
+        </div>
+      </form>   
+    
+      {% if error %}
+          <p class="error">{{ error }}</p>
+      {% endif %}
+  </div>
+</body>

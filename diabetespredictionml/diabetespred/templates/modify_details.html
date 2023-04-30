@@ -1,0 +1,108 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <h1>Existing Values </h1>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Metric</th>
+            <th scope="col">Current Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Age</td>
+            <td>{{ metrics_data.age }}</td>
+          </tr>
+          <tr>
+            <td>Height</td>
+            <td>{{ metrics_data.height }} cm</td>
+          </tr>
+          <tr>
+            <td>Weight</td>
+            <td>{{ metrics_data.weight }} Kg</td>
+          </tr>
+          <tr>
+            <td>Insulin</td>
+            <td>{{ metrics_data.Insulin }}</td>
+          </tr>
+          <tr>
+            <td>Glucose</td>
+            <td>{{ metrics_data.Glucose }}</td>
+          </tr>
+          <tr>
+            <td>BloodPressure</td>
+            <td>{{ metrics_data.BloodPressure }}</td>
+          </tr>
+          <tr>
+            <td>Pregnancies</td>
+            <td>{{ metrics_data.Pregnancies }}</td>
+          </tr>
+          <tr>
+            <td>SkinThickness</td>
+            <td>{{ metrics_data.SkinThickness }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+    <div class="contact-us my-6">
+      <div class="card p-4">
+        <div class="card-header bg-primary text-white">
+          <h1 class="text-center m-0">Modify Values </h1>
+        </div>
+        <form id="form2" name="form2" method="post" action="{% url 'modify_details' %}">
+          {% csrf_token %}
+          <div class="card-body">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="Pregnancies">Pregnancies</label>
+                <input type="text" class="form-control" name="Pregnancies" id="Pregnancies" value="{{ metrics_data.Pregnancies}}" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="Glucose">Glucose</label>
+                <input type="text" class="form-control" name="Glucose" id="Glucose" value="{{ metrics_data.Glucose}}" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="BloodPressure">Blood Pressure</label>
+                <input type="text" class="form-control" name="BloodPressure" id="BloodPressure" value="{{ metrics_data.BloodPressure}}" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="SkinThickness">Skin Thickness</label>
+                <input type="text" class="form-control" name="SkinThickness" id="SkinThickness" value="{{ metrics_data.SkinThickness}}" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="Insulin">Insulin</label>
+                <input type="text" class="form-control" name="Insulin" id="Insulin" value="{{ metrics_data.Insulin}}" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="Height">Height (in Cms)</label>
+                <input type="text" class="form-control" name="Height" id="Height" value="{{ metrics_data.height}}" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="Weight">Weight (in Kg's)</label>
+                <input type="text" class="form-control" name="Weight" id="Weight" value="{{ metrics_data.weight}}" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="Age">Age</label>
+                <input type="text" class="form-control" name="Age" id="Age" value="{{ metrics_data.age}}" required>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" onclick="clearForm()">Clear</button>
+          </div>
+        </form>      
+      </div>
+    </div>
+{% endblock %}

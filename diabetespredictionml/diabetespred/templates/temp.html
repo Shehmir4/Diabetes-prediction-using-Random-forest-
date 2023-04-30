@@ -1,0 +1,38 @@
+{% load static %}
+{% csrf_token %}
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">   
+        <a href="{% url 'home' %}" class="navbar-brand">Home</a>
+        {% if request.user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="navbar-brand logout">Logout</button>
+        </form>
+        {% else %}
+        <a href="{% url 'login_patient' %}" class="navbar-brand">Login</a>
+        {% endif %}
+        <a href="#" class="navbar-brand">News</a>
+        <a href="{% url 'modify_details' %}" class="navbar-brand">Modify details</a>
+        <a href="{% url 'dietrecomendation' %}" class="navbar-brand">Dietrecomendation</a>
+    
+    </nav>
+    {% block content %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

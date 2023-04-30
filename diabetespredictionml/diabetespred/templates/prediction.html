@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row mt-4">
+    <div class="col-12">
+        <h2>Diabetes Prediction Result:</h2>
+            {% if prediction == 0 %}
+                <p>Congrats! You are less likely to be diabetic</p>
+                {% else %}
+                    <p>You are likely to be diabetic. Consult a Doctor Immediately.</p>
+                {% endif %}
+            <h2>Want to see a Healthy diet Recommendations ?</h2>
+            <br> <!-- added line break -->
+            <a href="{% url 'dietrecomendation' %}" class="btn btn-primary" style="text-decoration:none;">View Diet Recommendation</a>
+       
+    </div>
+</div>
+{% endblock %}
